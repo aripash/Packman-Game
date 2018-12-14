@@ -1,16 +1,12 @@
-
-Ex2
-this project can calculate azimuth elevation distance and vector between 2 gps points,
-read csv format file and convert it to kml,
-check a folder for all of its csv files, save them both as a geographic layer and as a kml.
+Ex3-4
+this project preforms a packman game.
 
 Prerequisites
 JUnit 5.
-json-simple-1.1.1.jar
+json-simple-1.1.1.jar.
 
 Running the tests
-junit CoordsTest to test Mycoords.
-class kml to test csv2kml and multicsv.
+Test package to test verious elements.
 
 Built With
 eclipse.
@@ -21,7 +17,7 @@ https://en.wikipedia.org/wiki/Keyhole_Markup_Language
 http://digitalappconsultancy.com/site/how-to-read-all-files-inside-folder-in-java-code/
 
 Version
-1.2
+1.0
 
 Authors
 Denis Shapira
