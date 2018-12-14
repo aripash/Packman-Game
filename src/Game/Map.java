@@ -12,6 +12,13 @@ private	Image mapImage;
 		MyFrame mg=new MyFrame(path);
 		this.mapImage=mg.image;
 	}
+	/**
+	 * converts points in pixels to point3D
+	 * @param pixX x of the pixel(x,y)
+	 * @param pixY y of the pixel (x,y)
+	 * @param alt the altitude of the point
+	 * @return point as a point3D type
+	 */
 public Point3D convP2C(int pixX,int pixY,double alt) {
 	int width=mapImage.getWidth(null);
 	int hight=mapImage.getHeight(null);
@@ -23,6 +30,11 @@ public Point3D convP2C(int pixX,int pixY,double alt) {
 	diffY+=32.105733;
 	return new Point3D(diffX,diffY,alt);
 }
+/**
+ * Converts point3D to array that represent pixel
+ * @param gps point3D
+ * @return point represented as pixel [x,y]
+ */
 public int [] convC2P(Point3D gps) {
 	int width=mapImage.getWidth(null);
 	int hight=mapImage.getHeight(null);
@@ -37,9 +49,19 @@ public int [] convC2P(Point3D gps) {
 	int[]ans= {(int)pixX,(int)pixY};
 	return ans;
 }
-public double[] distance(int x1,int y1,int x2,int y2) {
-	Point3D a=convP2C(x1,y1,0);
-	Point3D b=convP2C(x2,y2,0);
+/**
+ * returns data between two pixels
+ * @param x1 x of the first pixel(x,y)
+ * @param y1 y of the first pixel(x,y)
+ * @param alt1
+ * @param x2 x of the second pixel(x,y)
+ * @param y2 t of the second pixel(x,y)
+ * @param alt2
+ * @return[azimuth,elevation,distance] between two points
+ */
+public double[] distance(int x1,int y1,double alt1,int x2,int y2,double alt2) {
+	Point3D a=convP2C(x1,y1,alt1);
+	Point3D b=convP2C(x2,y2,alt2);
 	MyCoords cord=new MyCoords();
 	return cord.azimuth_elevation_dist(a, b);
 }

@@ -15,8 +15,16 @@ public class Game {
 	private ArrayList<Fruit> fruits;
 	private String path;
 	
-	public void read(String path) {
+	public Game(String path) {
 		this.path=path;
+		packmen=new ArrayList<PackMan>();
+		fruits=new ArrayList<Fruit>();
+		read();
+	}
+	/**
+	 * using the path it reads the csv file and builds packmen and fruits
+	 */
+	public void read() {
 		String line = "";
 		String cvsSplitBy = ",";
 
@@ -38,6 +46,9 @@ public class Game {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * writes a csv file using the packmen and fruits in the folder that the path points to
+	 */
 	public void write() {
 		PrintWriter pw = null;
 		try 
