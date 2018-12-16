@@ -4,3 +4,4 @@ if a class is in a different patch then it means it was changed to suit the new 
 1.0.1 added Map and Game.
 1.0.2 added Path and ShortestPathAlog.
 1.0.2.1 added function distance and time to packman.
+1.0.3 added MyFrame not complete.

@@ -1,16 +1,17 @@
 package Game;
 
-import java.awt.Image;
-
+import java.awt.image.BufferedImage;
 import Coords.MyCoords;
-import GUI.MyFrame;
 import Geom.Point3D;
 
 public class Map {
-private	Image mapImage;
-	public Map(String path) {
-		MyFrame mg=new MyFrame(path);
-		this.mapImage=mg.image;
+private	BufferedImage mapImage;
+private int width;
+private int height;
+	public Map(BufferedImage mage) {
+		this.mapImage=mage;
+		int width=mapImage.getWidth();
+		int hight=mapImage.getHeight();
 	}
 	/**
 	 * converts points in pixels to point3D
@@ -20,10 +21,9 @@ private	Image mapImage;
 	 * @return point as a point3D type
 	 */
 public Point3D convP2C(int pixX,int pixY,double alt) {
-	int width=mapImage.getWidth(null);
-	int hight=mapImage.getHeight(null);
+	
 	double diffX=pixX/(double)width;
-	double diffY=pixY/(double)hight;
+	double diffY=pixY/(double)height;
 	diffX*=0.009531;//the difference in longitude between the top left and top right (32.105733,35.202401)-(32.105685,35.211932)
 	diffY*=0.00383;//the difference in latitude between the top left and bottom left(32.105733,35.202401)-(32.101903,35.202338)
 	diffX+=35.202401;
@@ -36,8 +36,6 @@ public Point3D convP2C(int pixX,int pixY,double alt) {
  * @return point represented as pixel [x,y]
  */
 public int [] convC2P(Point3D gps) {
-	int width=mapImage.getWidth(null);
-	int hight=mapImage.getHeight(null);
 	double pixX=gps.x();
 	double pixY=gps.y();
 	pixX-=35.202401;
@@ -45,7 +43,7 @@ public int [] convC2P(Point3D gps) {
 	pixX/=0.009531;
 	pixY/=0.00383;
 	pixX*=width;
-	pixY*=hight;
+	pixY*=height;
 	int[]ans= {(int)pixX,(int)pixY};
 	return ans;
 }
@@ -64,5 +62,11 @@ public double[] distance(int x1,int y1,double alt1,int x2,int y2,double alt2) {
 	Point3D b=convP2C(x2,y2,alt2);
 	MyCoords cord=new MyCoords();
 	return cord.azimuth_elevation_dist(a, b);
+}
+public void setWidth(int width) {
+	this.width=width;
+}
+public void setHeight(int height) {
+	this.height=height;
 }
 }

@@ -8,9 +8,16 @@ private int speed;
 private int radius;
 private Path path;
 public PackMan(Point3D gps,int speed,int radius) {
-	this.gps=gps;
+	this.gps=new Point3D(gps);
 	this.speed=speed;
 	this.radius=radius;
+	this.path=new Path();
+	path.add(gps);
+}
+public PackMan(Point3D gps) {
+	this.gps=new Point3D(gps);
+	this.speed=5;
+	this.radius=8;
 	this.path=new Path();
 	path.add(gps);
 }
@@ -36,5 +43,8 @@ public double pathDist() {
 public double Time(double dist) {
 	double ans=dist/speed;
 	return ans;
+}
+public int getRadius() {
+	return radius;
 }
 }

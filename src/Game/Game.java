@@ -13,18 +13,20 @@ import Geom.Point3D;
 public class Game {
 	private ArrayList<PackMan> packmen;
 	private ArrayList<Fruit> fruits;
-	private String path;
-	
+
 	public Game(String path) {
-		this.path=path;
 		packmen=new ArrayList<PackMan>();
 		fruits=new ArrayList<Fruit>();
-		read();
+		read(path);
+	}
+	public Game() {
+		packmen=new ArrayList<PackMan>();
+		fruits=new ArrayList<Fruit>();
 	}
 	/**
 	 * using the path it reads the csv file and builds packmen and fruits
 	 */
-	public void read() {
+	public void read(String path) {
 		String line = "";
 		String cvsSplitBy = ",";
 
@@ -49,13 +51,11 @@ public class Game {
 	/**
 	 * writes a csv file using the packmen and fruits in the folder that the path points to
 	 */
-	public void write() {
+	public void write(String path) {
 		PrintWriter pw = null;
 		try 
 		{
-			if(path.charAt(path.length()-1)=='/')path=path.substring(0, path.length());
-			String nPath=path.substring(0, path.lastIndexOf("/"));
-			pw = new PrintWriter(new File(nPath));
+			pw = new PrintWriter(new File(path));
 		} 
 		catch (FileNotFoundException e) 
 		{
@@ -63,6 +63,7 @@ public class Game {
 			return;
 		}
 		StringBuilder sb = new StringBuilder();
+		sb.append("Type,id,Lat,Lon,Alt,Speed,Radius,\n");
 		Iterator<PackMan> i1=packmen.iterator();
 		Iterator<Fruit> i2=fruits.iterator();
 		int j=0;
@@ -90,5 +91,11 @@ public class Game {
 	}
 	public ArrayList<PackMan> getPackmen(){//no new so we can change the path for each packman
 		return packmen;
+	}
+	public void addPackMan(PackMan p) {
+		packmen.add(p);
+	}
+	public void addFruit(Fruit f) {
+		fruits.add(f);
 	}
 }
