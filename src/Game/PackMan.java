@@ -30,4 +30,11 @@ public void add(Point3D p) {
 public int getSpeed() {
 	return speed;
 }
+public double pathDist() {
+	return path.distance();
+}
+public double Time(double dist) {
+	double ans=dist/speed;
+	return ans;
+}
 }
