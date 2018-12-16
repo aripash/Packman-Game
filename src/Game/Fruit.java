@@ -11,4 +11,7 @@ public Fruit(Point3D gps) {
 public String toString() {
 	return gps.x()+","+gps.y()+","+gps.z()+",";
 }
+public Point3D getFruit() {
+	return gps;
+}
 }

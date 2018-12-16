@@ -85,4 +85,10 @@ public class Game {
 		pw.close();
 		System.out.println("done!");
 	}
+	public ArrayList<Fruit> getFruits(){
+		return new ArrayList<Fruit>(fruits);
+	}
+	public ArrayList<PackMan> getPackmen(){//no new so we can change the path for each packman
+		return packmen;
+	}
 }
