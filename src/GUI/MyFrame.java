@@ -61,20 +61,17 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener{
 		menu2.add(item2b);
 
 		Menu menu3 = new Menu("Game"); 
-		MenuItem item3a = new MenuItem("Start");
-		MenuItem item3b = new MenuItem("Reset");
+		MenuItem item3 = new MenuItem("Start");
 
 		menuBar.add(menu3);
-		menu3.add(item3a);
-		menu3.add(item3b);
+		menu3.add(item3);
 		this.setMenuBar(menuBar);
 
 		item1a.addActionListener(this);
 		item1b.addActionListener(this);
 		item2a.addActionListener(this);
 		item2b.addActionListener(this);
-		item3a.addActionListener(this);
-		item3b.addActionListener(this);
+		item3.addActionListener(this);
 
 	}
 
@@ -84,22 +81,24 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener{
 		map.setHeight(this.getHeight());
 		if(!game.getPackmen().isEmpty()) {
 			Iterator<PackMan> i=this.game.getPackmen().iterator();
-
-			g.setColor(Color.yellow);
 			while(i.hasNext()) {
+				g.setColor(Color.yellow);
 				PackMan pi=i.next();
-				ArrayList<Point3D> pl=pi.getPath().getPoints();
-				int[] pix=map.convC2P(pl.get(pl.size()-1));
-				g.fillOval(pix[0], pix[1], pi.getRadius()*2, pi.getRadius()*2);
+				int[] pix=map.convC2P(pi.getLastGps());
+				g.fillOval(pix[0], pix[1], pi.getRadius(), pi.getRadius());
+				g.setColor(Color.black);
+				g.drawOval(pix[0], pix[1], pi.getRadius(), pi.getRadius());
 			}
 		}
 		if(!game.getFruits().isEmpty()) {
 			Iterator<Fruit> j=this.game.getFruits().iterator();
-			g.setColor(Color.red);
 			while(j.hasNext()) {
+				g.setColor(Color.red);
 				Fruit fi=j.next();
 				int[] pix=map.convC2P(fi.getFruit());
 				g.fillOval(pix[0],pix[1], 15, 15);
+				g.setColor(Color.black);
+				g.drawOval(pix[0],pix[1], 15, 15);
 			}
 		}
 	}
@@ -120,7 +119,7 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener{
 			}
 		}
 		catch(Exception e){
-			
+
 		}
 	}
 
@@ -179,9 +178,6 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener{
 			what="F";
 		}
 		if(e.getActionCommand().equalsIgnoreCase("Start")) {
-
-		}
-		if(e.getActionCommand().equalsIgnoreCase("Reset")) {
 
 		}
 	}
