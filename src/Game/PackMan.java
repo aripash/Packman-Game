@@ -47,4 +47,7 @@ public double Time(double dist) {
 public int getRadius() {
 	return radius;
 }
+public Point3D getLastGps() {
+	return path.getPoints().get(path.getPoints().size()-1);
+}
 }

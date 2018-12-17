@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
+import Coords.MyCoords;
 import Geom.Point3D;
 
 public class Game {
@@ -97,5 +98,18 @@ public class Game {
 	}
 	public void addFruit(Fruit f) {
 		fruits.add(f);
+	}
+	public void addTime(Fruit min, double time) {
+		// TODO Auto-generated method stub
+		Iterator<Fruit> i=fruits.iterator();
+		boolean flag=true;
+		MyCoords c=new MyCoords();
+		while(i.hasNext()&&flag) {
+			Fruit temp=i.next();
+			if(c.distance3d(min.getFruit(), temp.getFruit())==0.0) {
+				temp.setTime(time);
+				flag=false;
+			}
+		}
 	}
 }

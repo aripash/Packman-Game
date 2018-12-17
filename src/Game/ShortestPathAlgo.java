@@ -22,8 +22,7 @@ public class ShortestPathAlgo {
 				Iterator<Fruit> j=fruitsLeft.iterator();
 				PackMan pack=i.next();		//the packman i want to check
 				Fruit min=j.next();		//the fruit thats the closes to the packman pack
-				ArrayList<Point3D> pl=pack.getPath().getPoints();
-				Point3D packlocal=pl.get(pl.size()-1);
+				Point3D packlocal=pack.getLastGps();
 				while(j.hasNext()) {		//which fruit is the closest to the packman
 					Fruit temp=j.next();
 					if(c.distance3d(min.getFruit(),packlocal)>c.distance3d(temp.getFruit(), packlocal))min=temp;
@@ -32,8 +31,7 @@ public class ShortestPathAlgo {
 				Iterator<PackMan> iCheck=packmen.iterator();
 				while(flag&&iCheck.hasNext()) {
 					PackMan packCheck=iCheck.next();
-					ArrayList<Point3D> plCheck=packCheck.getPath().getPoints();
-					Point3D pakclocalCheck=plCheck.get(pl.size()-1);
+					Point3D pakclocalCheck=packCheck.getLastGps();
 					double totalDistance1=c.distance3d(packlocal, min.getFruit())+pack.getPath().distance();
 					double totalDistance2=c.distance3d(pakclocalCheck, min.getFruit())+packCheck.getPath().distance();
 					double Time1=pack.Time(totalDistance1);
@@ -42,6 +40,7 @@ public class ShortestPathAlgo {
 				}
 				if(flag) {
 					pack.add(min.getFruit());
+					game.addTime(min,(pack.getPath().distance()/pack.getSpeed()));
 					fruitsLeft.remove(min);
 				}
 			}

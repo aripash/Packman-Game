@@ -84,6 +84,7 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener{
 		map.setHeight(this.getHeight());
 		if(!game.getPackmen().isEmpty()) {
 			Iterator<PackMan> i=this.game.getPackmen().iterator();
+
 			g.setColor(Color.yellow);
 			while(i.hasNext()) {
 				PackMan pi=i.next();
@@ -106,17 +107,21 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener{
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		if(what.equalsIgnoreCase("P")) {
-			Point3D point=map.convP2C(arg0.getX(), arg0.getY(), 0);
-			game.addPackMan(new PackMan(point));
-			repaint();
+		try {
+			if(what.equalsIgnoreCase("P")) {
+				Point3D point=map.convP2C(arg0.getX(), arg0.getY(), 0);
+				game.addPackMan(new PackMan(point));
+				repaint();
+			}
+			else if(what.equalsIgnoreCase("F")) {
+				Point3D point=map.convP2C(arg0.getX(), arg0.getY(), 0);
+				game.addFruit(new Fruit(point));
+				repaint();
+			}
 		}
-		else if(what.equalsIgnoreCase("F")) {
-			Point3D point=map.convP2C(arg0.getX(), arg0.getY(), 0);
-			game.addFruit(new Fruit(point));
-			repaint();
+		catch(Exception e){
+			
 		}
-		else ;//nothing}
 	}
 
 	@Override
@@ -161,9 +166,11 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener{
 			if(value==fc.APPROVE_OPTION) {
 				File file=fc.getSelectedFile();
 				this.game=new Game(file.getPath());
+				System.out.println(game);
 				repaint();
 			}
-			
+
+
 		}
 		if(e.getActionCommand().equalsIgnoreCase("Packman")) {
 			what="P";
