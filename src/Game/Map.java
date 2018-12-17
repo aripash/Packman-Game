@@ -10,8 +10,8 @@ private int width;
 private int height;
 	public Map(BufferedImage mage) {
 		this.mapImage=mage;
-		int width=mapImage.getWidth();
-		int hight=mapImage.getHeight();
+		this.width=mapImage.getWidth();
+		this.height=mapImage.getHeight();
 	}
 	/**
 	 * converts points in pixels to point3D
@@ -25,7 +25,7 @@ public Point3D convP2C(int pixX,int pixY,double alt) {
 	double diffX=pixX/(double)width;
 	double diffY=pixY/(double)height;
 	diffX*=0.009531;//the difference in longitude between the top left and top right (32.105733,35.202401)-(32.105685,35.211932)
-	diffY*=0.00383;//the difference in latitude between the top left and bottom left(32.105733,35.202401)-(32.101903,35.202338)
+	diffY*=-0.00383;//the difference in latitude between the top left and bottom left(32.105733,35.202401)-(32.101903,35.202338)
 	diffX+=35.202401;
 	diffY+=32.105733;
 	return new Point3D(diffX,diffY,alt);
@@ -39,7 +39,7 @@ public int [] convC2P(Point3D gps) {
 	double pixX=gps.x();
 	double pixY=gps.y();
 	pixX-=35.202401;
-	pixY-=32.105733;
+	pixY=32.105733-pixY;
 	pixX/=0.009531;
 	pixY/=0.00383;
 	pixX*=width;

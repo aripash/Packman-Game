@@ -21,6 +21,8 @@ import Game.Fruit;
 import Game.Game;
 import Game.Map;
 import Game.PackMan;
+import Game.Path;
+import Game.ShortestPathAlgo;
 import Geom.Point3D;
 
 public class MyFrame extends JFrame implements MouseListener,ActionListener{
@@ -79,17 +81,6 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener{
 		g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), this);
 		map.setWidth(this.getWidth());
 		map.setHeight(this.getHeight());
-		if(!game.getPackmen().isEmpty()) {
-			Iterator<PackMan> i=this.game.getPackmen().iterator();
-			while(i.hasNext()) {
-				g.setColor(Color.yellow);
-				PackMan pi=i.next();
-				int[] pix=map.convC2P(pi.getLastGps());
-				g.fillOval(pix[0], pix[1], pi.getRadius(), pi.getRadius());
-				g.setColor(Color.black);
-				g.drawOval(pix[0], pix[1], pi.getRadius(), pi.getRadius());
-			}
-		}
 		if(!game.getFruits().isEmpty()) {
 			Iterator<Fruit> j=this.game.getFruits().iterator();
 			while(j.hasNext()) {
@@ -99,6 +90,30 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener{
 				g.fillOval(pix[0],pix[1], 15, 15);
 				g.setColor(Color.black);
 				g.drawOval(pix[0],pix[1], 15, 15);
+			}
+		}
+		if(!game.getPackmen().isEmpty()) {
+			ArrayList<PackMan> arrpack=new ArrayList<PackMan>(this.game.getPackmen());
+			Iterator<PackMan> i=arrpack.iterator();
+			while(i.hasNext()) {
+				g.setColor(Color.yellow);
+				PackMan pi=i.next();
+				int[] pix=map.convC2P(pi.getLastGps());
+				g.fillOval(pix[0], pix[1], 18, 18);
+				g.setColor(Color.black);
+				g.drawOval(pix[0], pix[1], 18, 18);
+				Path path=pi.getPath();
+				Iterator<Point3D> iteratorpoint=path.iterator();
+				g.setColor(Color.GREEN);
+				Point3D point=iteratorpoint.next();
+				int[]pix1=map.convC2P(point);
+				while(iteratorpoint.hasNext()) {
+					Point3D temp=iteratorpoint.next();
+					int[]pix2=this.map.convC2P(temp);
+					g.drawLine(pix1[0], pix1[1], pix2[0], pix2[1]);
+					point=temp;
+					pix1=pix2;
+				}
 			}
 		}
 	}
@@ -165,11 +180,8 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener{
 			if(value==fc.APPROVE_OPTION) {
 				File file=fc.getSelectedFile();
 				this.game=new Game(file.getPath());
-				System.out.println(game);
 				repaint();
 			}
-
-
 		}
 		if(e.getActionCommand().equalsIgnoreCase("Packman")) {
 			what="P";
@@ -178,7 +190,9 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener{
 			what="F";
 		}
 		if(e.getActionCommand().equalsIgnoreCase("Start")) {
-
+			ShortestPathAlgo algo=new ShortestPathAlgo();
+			algo.Start(game);
+			repaint();
 		}
 	}
 }

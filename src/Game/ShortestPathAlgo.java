@@ -32,8 +32,8 @@ public class ShortestPathAlgo {
 				while(flag&&iCheck.hasNext()) {
 					PackMan packCheck=iCheck.next();
 					Point3D pakclocalCheck=packCheck.getLastGps();
-					double totalDistance1=c.distance3d(packlocal, min.getFruit())+pack.getPath().distance();
-					double totalDistance2=c.distance3d(pakclocalCheck, min.getFruit())+packCheck.getPath().distance();
+					double totalDistance1=c.distance3d(packlocal, min.getFruit())+pack.getPath().distance()-pack.getRadius();
+					double totalDistance2=c.distance3d(pakclocalCheck, min.getFruit())+packCheck.getPath().distance()-packCheck.getRadius();
 					double Time1=pack.Time(totalDistance1);
 					double Time2=packCheck.Time(totalDistance2);
 					if(Time1>Time2)flag=false;		//if the time it takes the packman to reach the fruit isn't ideal

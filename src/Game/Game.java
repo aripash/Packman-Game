@@ -35,13 +35,12 @@ public class Game {
 			br.readLine();
 			while ((line = br.readLine()) != null) {
 				String[] lineData = line.split(cvsSplitBy);
-				Point3D gps=new Point3D(Double.parseDouble(lineData[2]),Double.parseDouble(lineData[3]),Double.parseDouble(lineData[4]));
+				Point3D gps=new Point3D(Double.parseDouble(lineData[3]),Double.parseDouble(lineData[2]),Double.parseDouble(lineData[4]));
 				if(lineData[0].equalsIgnoreCase("F")) {
 					fruits.add(new Fruit(gps));
 				}
 				else if(lineData[0].equalsIgnoreCase("P")) {
-					PackMan p=new PackMan(gps,Integer.parseInt(lineData[5]),Integer.parseInt(lineData[6]));
-					packmen.add(p);
+					packmen.add(new PackMan(gps,Integer.parseInt(lineData[5]),Integer.parseInt(lineData[6])));
 				}
 			}
 		}
@@ -85,7 +84,6 @@ public class Game {
 		}
 		pw.write(sb.toString());
 		pw.close();
-		System.out.println("done!");
 	}
 	public ArrayList<Fruit> getFruits(){
 		return new ArrayList<Fruit>(fruits);

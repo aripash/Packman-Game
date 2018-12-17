@@ -10,7 +10,7 @@ public Fruit(Point3D gps) {
 	this.gps=new Point3D(gps);
 }
 public String toString() {
-	return gps.x()+","+gps.y()+","+gps.z()+",";
+	return gps.y()+","+gps.x()+","+gps.z()+",";
 }
 public Point3D getFruit() {
 	return gps;

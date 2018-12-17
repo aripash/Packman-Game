@@ -6,3 +6,4 @@ if a class is in a different patch then it means it was changed to suit the new 
 1.0.2.1 added function distance and time to packman.
 1.0.3 added MyFrame not complete.
 1.0.3.1 added minor functions to Fruit and Packman.
+1.0.4 finished MyFrame.
