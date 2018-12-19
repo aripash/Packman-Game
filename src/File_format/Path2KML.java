@@ -3,10 +3,8 @@ package File_format;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.Iterator;
 
-import Game.Fruit;
 import Game.Game;
 import Game.PackMan;
 
@@ -28,10 +26,11 @@ public class Path2KML {
 		}
 		StringBuilder sb = new StringBuilder();
 		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-		sb.append("<kml xmlns=\"http://www.opengis.net/kml/2.2\"");
-		sb.append("xmlns:gx=\"http://www.google.com/kml/ext/2.2\">");
+		sb.append("<kml xmlns=\"http://www.opengis.net/kml/2.2\">");
 		sb.append("<Document>");
 		sb.append("<name>PackMan</name>");
+		pw.write(sb.toString());
+		sb.delete(0, sb.toString().length());
 		Iterator<PackMan> i=game.getPackmen().iterator();
 		while(i.hasNext()) {
 			PackMan pi=i.next();
@@ -44,15 +43,15 @@ public class Path2KML {
 				else sb.append("2018-08-16T22:00:"+time);
 				sb.append("</when>");
 				sb.append("</TimeStamp>");
-				sb.append("<styleURL>");
-				sb.append("#hiker-icon");
-				sb.append("</styleURL>");
 				sb.append("<Point>");
 				sb.append("<coordinates>");
 				sb.append(pi.currentPoint(time).toString());
 				sb.append("</coordinates>");
 				sb.append("</Point>");
 				sb.append("</Placemark>");
+				pw.write(sb.toString());
+				sb.delete(0, sb.toString().length());
+				time++;
 			}
 		}
 		sb.append("</Document>");

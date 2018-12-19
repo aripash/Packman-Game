@@ -19,7 +19,7 @@ public class PackMan {
 	}
 	public PackMan(Point3D gps) {
 		this.gps=new Point3D(gps);
-		this.speed=5;
+		this.speed=20;
 		this.radius=1;
 		this.path=new Path();
 		path.add(gps);

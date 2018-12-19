@@ -17,6 +17,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import File_format.Path2KML;
 import Game.Fruit;
 import Game.Game;
 import Game.Map;
@@ -53,10 +54,12 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener,Runn
 		Menu menu1=new Menu("File");
 		MenuItem item1a = new MenuItem("Save");
 		MenuItem item1b = new MenuItem("Load");
+		MenuItem item1c = new MenuItem("Save to KML");
 
 		menuBar.add(menu1);
 		menu1.add(item1a);
 		menu1.add(item1b);
+		menu1.add(item1c);
 
 		Menu menu2 = new Menu("Add"); 
 		MenuItem item2a = new MenuItem("Packman");
@@ -75,6 +78,7 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener,Runn
 
 		item1a.addActionListener(this);
 		item1b.addActionListener(this);
+		item1c.addActionListener(this);
 		item2a.addActionListener(this);
 		item2b.addActionListener(this);
 		item3.addActionListener(this);
@@ -175,7 +179,7 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener,Runn
 			int value=fc.showSaveDialog(null);
 			if(value==fc.APPROVE_OPTION) {
 				File file=fc.getSelectedFile();
-				game.write(file.getPath());
+				game.write(file.getPath()+".csv");
 			}
 		}
 		if(e.getActionCommand().equalsIgnoreCase("Load")) {
@@ -188,6 +192,15 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener,Runn
 				this.game=new Game(file.getPath());
 				repaint();
 			}
+		}
+		if(e.getActionCommand().equalsIgnoreCase("Save to KML")) {
+			Path2KML pathKml = new Path2KML(game);
+			JFileChooser fc = new JFileChooser();
+				int value=fc.showSaveDialog(null);
+				if(value==fc.APPROVE_OPTION) {
+					File file=fc.getSelectedFile();
+					pathKml.write(file.getPath()+".kml");
+				}
 		}
 		if(e.getActionCommand().equalsIgnoreCase("Packman")) {
 			what="P";
