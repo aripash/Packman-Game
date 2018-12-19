@@ -200,7 +200,6 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener,Runn
 			count=0;
 			started=true;
 			repaint();
-			
 		}
 	}
 	

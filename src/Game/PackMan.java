@@ -54,7 +54,7 @@ public class PackMan {
 		return path.getPoints().get(path.getPoints().size()-1);
 	}
 	/**
-	 * returns the point that the packman should be in the current time
+	 *  returns the point that the packman should be in the current time
 	 * @param time the amout time the packman traveled
 	 * @return Point3D of the current location of the packman
 	 */
