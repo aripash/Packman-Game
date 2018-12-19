@@ -59,7 +59,7 @@ public class PackMan {
 	 * @return Point3D of the current location of the packman
 	 */
 	public Point3D currentPoint(double time) {
-		if(path.getPoints().size()==1)return gps;
+		if(path.getPoints().size()==1)return gps;//check if the game started
 		Point3D[] range=new Point3D[2];
 		MyCoords c=new MyCoords();
 		double searchDistance1=0;
@@ -69,9 +69,10 @@ public class PackMan {
 		double distanceX1=0;
 		Iterator<Point3D> i=path.iterator();
 		Point3D pi=i.next();
-		while(i.hasNext()) {
+		while(i.hasNext()) {//between which 2 points the packman is located
 			Point3D temp=i.next();
 			searchDistance2=c.distance3d(pi, temp);
+			searchDistance2+=searchDistance1;
 			if(distance>=searchDistance1&&distance<=searchDistance2) {
 				range[0]=pi;
 				range[1]=temp;
@@ -81,19 +82,16 @@ public class PackMan {
 			pi=temp;
 			searchDistance1=searchDistance2;
 		}
-		if(distance>=searchDistance1)return this.getLastGps();
-		double ratio=distance-distanceX0;
-		ratio/=distanceX1-distanceX0;
-		double deltaX=range[1].x()-range[0].x();
-		double deltaY=range[1].y()-range[0].y();
-		double deltaZ=range[1].z()-range[0].z();
-		deltaX*=ratio;
-		deltaY*=ratio;
-		deltaZ*=ratio;
-		deltaX+=range[0].x();
-		deltaY+=range[0].y();
-		deltaZ+=range[0].z();
-		Point3D ans=new Point3D(deltaX,deltaY,deltaZ);
+		if(distance>=searchDistance1)return this.getLastGps();//if the time exceeds the time to complete the game
+		double ratio1=distance-distanceX0;
+		double ratio2=distanceX1-distance;
+		double newX=ratio2*range[0].x()+ratio1*range[1].x();
+		double newY=ratio2*range[0].y()+ratio1*range[1].y();
+		double newZ=ratio2*range[0].z()+ratio1*range[1].z();
+		newX/=(ratio1+ratio2);
+		newY/=(ratio1+ratio2);
+		newZ/=(ratio1+ratio2);
+		Point3D ans=new Point3D(newX,newY,newZ);
 		return ans;
 	}
 }

@@ -209,7 +209,7 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener,Runn
 		repaint();
 		count++;
 		try {
-			Thread.sleep(10L*100L);
+			Thread.sleep(1000L);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
