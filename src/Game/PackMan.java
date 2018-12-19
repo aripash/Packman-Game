@@ -54,9 +54,9 @@ public class PackMan {
 		return path.getPoints().get(path.getPoints().size()-1);
 	}
 	/**
-	 * returns the two points the packman is between in the "time" second
+	 * returns the point that the packman should be in the current time
 	 * @param time the amout time the packman traveled
-	 * @return array of points that the packman can be between
+	 * @return Point3D of the current location of the packman
 	 */
 	public Point3D currentPoint(double time) {
 		if(path.getPoints().size()==1)return gps;
