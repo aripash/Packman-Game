@@ -110,4 +110,14 @@ public class Game {
 			}
 		}
 	}
+	public int lastTime() {
+		Iterator<Fruit> i=fruits.iterator();
+		int maxTime=0;
+		while(i.hasNext()) {
+			Fruit fi=i.next();
+			int temp=(int) fi.getTime();
+			if(temp>maxTime)maxTime=temp;
+		}
+		return maxTime;
+	}
 }

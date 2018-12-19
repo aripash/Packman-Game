@@ -32,6 +32,7 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener,Runn
 	private String what;
 	private int count=0;
 	private boolean started=false;
+	private int timeStop=9999;
 
 	public MyFrame(String imagePath,String name) {
 		super(name);
@@ -41,7 +42,7 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener,Runn
 		this.addMouseListener(this); 
 
 	}
-	public void startimage(String imagePath) {
+	public void startimage(String imagePath) {	
 		try {
 			image = ImageIO.read(new File(imagePath));//"C:/Users/Owner/Desktop/Ex3/Ex3/Ex3/Ariel1.png"
 		} catch (IOException e) {
@@ -197,6 +198,7 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener,Runn
 		if(e.getActionCommand().equalsIgnoreCase("Start")) {
 			ShortestPathAlgo algo=new ShortestPathAlgo();
 			algo.Start(game);
+			timeStop=game.lastTime();
 			count=0;
 			started=true;
 			repaint();
@@ -214,6 +216,6 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener,Runn
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		run();
+		if(count<timeStop+2)run();
 	}
 }

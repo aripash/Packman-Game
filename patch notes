@@ -9,3 +9,4 @@ if a class is in a different patch then it means it was changed to suit the new 
 1.0.4 finished MyFrame.
 1.0.5 added animation(not complete).
 1.0.5.1 completed the animation.
+1.0.6 added Path2KML function.

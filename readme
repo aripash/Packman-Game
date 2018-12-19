@@ -5,6 +5,13 @@ Prerequisites
 JUnit 5.
 json-simple-1.1.1.jar.
 
+How to play
+in the file menu you cna save an existing game as a csv file
+or load a pre-existing file.
+in the add menu you can manualy add packman and fruits by selecting
+which one to add and click on the map.
+the start option makes the packmen move and eat the fruits.
+
 Running the tests
 Test package to test verious elements.
 
@@ -18,9 +25,10 @@ http://digitalappconsultancy.com/site/how-to-read-all-files-inside-folder-in-jav
 https://docs.oracle.com/javase/tutorial/uiswing/components/filechooser.html
 https://docs.oracle.com/javase/7/docs/api/javax/swing/JFileChooser.html
 http://tutorials.jenkov.com/java-concurrency/creating-and-starting-threads.html
+https://developers.google.com/kml/documentation/time
 
 Version
-1.0.5.1
+1.0.6
 
 Authors
 Denis Shapira
