@@ -54,60 +54,46 @@ public class PackMan {
 		return path.getPoints().get(path.getPoints().size()-1);
 	}
 	/**
-	 * function is used to find which two points of path the packman is in between in given time after the game started
-	 * @param time is the amount of time traveled by packman
-	 * @return array representing the two point that the packman is between
+	 * returns the two points the packman is between in the "time" second
+	 * @param time the amout time the packman traveled
+	 * @return array of points that the packman can be between
 	 */
-	public Point3D[] whichPoints(double time) {
-		Point3D[] rng=new Point3D[2];
+	public Point3D currentPoint(double time) {
+		if(path.getPoints().size()==1)return gps;
+		Point3D[] range=new Point3D[2];
 		MyCoords c=new MyCoords();
 		double searchDistance1=0;
 		double searchDistance2=0;
-		double distance=time*this.speed;
-		Iterator<Point3D> i=this.path.iterator();
-		Point3D pi=i.next();			////////do you have an idea what to do if array only has it's first element?////////
-		while(i.hasNext()) {
-			Point3D temp=i.next();
-			searchDistance2=c.distance3d(pi, temp);
-			if(distance>=searchDistance1&&distance<=searchDistance2) {
-				rng[0]=pi;
-				rng[1]=temp;
-				return rng;
-			}
-			pi=temp;
-			searchDistance1=searchDistance2;
-		}
-
-		return rng;
-	}
-	/**
-	 * Function is used to find the location of packman in percentage in between to points
-	 * @param time is the amount of time traveled by packman
-	 * @return
-	 */
-	public double locationInTime(double time) {
-		double location;
-		Point3D[] rng =new Point3D[2];
-		MyCoords c=new MyCoords();
-		double searchDistance1=0;
-		double searchDistance2=0;
-		double distance=time*this.speed;
-		Iterator<Point3D> i=this.path.iterator();
+		double distance=time*speed;
+		double distanceX0=0;
+		double distanceX1=0;
+		Iterator<Point3D> i=path.iterator();
 		Point3D pi=i.next();
-		Point3D first=new Point3D (pi);
 		while(i.hasNext()) {
 			Point3D temp=i.next();
 			searchDistance2=c.distance3d(pi, temp);
 			if(distance>=searchDistance1&&distance<=searchDistance2) {
-				rng[0]=pi;
-				rng[1]=temp;
+				range[0]=pi;
+				range[1]=temp;
+				distanceX0=searchDistance1;
+				distanceX1=searchDistance2;
 			}
 			pi=temp;
 			searchDistance1=searchDistance2;
 		}
-
-		location=	distance - c.distance3d(first, rng[0]);
-		location/=	c.distance3d(rng[0], rng[1]);
-		return location;
+		if(distance>=searchDistance1)return this.getLastGps();
+		double ratio=distance-distanceX0;
+		ratio/=distanceX1-distanceX0;
+		double deltaX=range[1].x()-range[0].x();
+		double deltaY=range[1].y()-range[0].y();
+		double deltaZ=range[1].z()-range[0].z();
+		deltaX*=ratio;
+		deltaY*=ratio;
+		deltaZ*=ratio;
+		deltaX+=range[0].x();
+		deltaY+=range[0].y();
+		deltaZ+=range[0].z();
+		Point3D ans=new Point3D(deltaX,deltaY,deltaZ);
+		return ans;
 	}
 }

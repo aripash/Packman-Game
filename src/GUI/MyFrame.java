@@ -25,15 +25,18 @@ import Game.Path;
 import Game.ShortestPathAlgo;
 import Geom.Point3D;
 
-public class MyFrame extends JFrame implements MouseListener,ActionListener{
+public class MyFrame extends JFrame implements MouseListener,ActionListener,Runnable{
 	public BufferedImage image;
 	private Game game;
 	private Map map;
 	private String what;
+	private int count=0;
+	private boolean started=false;
 
 	public MyFrame(String imagePath,String name) {
 		super(name);
 		this.game=new Game();
+		
 		startimage(imagePath);		
 		this.addMouseListener(this); 
 
@@ -86,10 +89,12 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener{
 			while(j.hasNext()) {
 				g.setColor(Color.red);
 				Fruit fi=j.next();
-				int[] pix=map.convC2P(fi.getFruit());
-				g.fillOval(pix[0],pix[1], 15, 15);
-				g.setColor(Color.black);
-				g.drawOval(pix[0],pix[1], 15, 15);
+				if(fi.getTime()>=count||!started) {
+					int[] pix=map.convC2P(fi.getFruit());
+					g.fillOval(pix[0],pix[1], 15, 15);
+					g.setColor(Color.black);
+					g.drawOval(pix[0],pix[1], 15, 15);
+				}
 			}
 		}
 		if(!game.getPackmen().isEmpty()) {
@@ -98,7 +103,7 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener{
 			while(i.hasNext()) {
 				g.setColor(Color.yellow);
 				PackMan pi=i.next();
-				int[] pix=map.convC2P(pi.getLastGps());
+				int[] pix=map.convC2P(pi.currentPoint(count));
 				g.fillOval(pix[0], pix[1], 18, 18);
 				g.setColor(Color.black);
 				g.drawOval(pix[0], pix[1], 18, 18);
@@ -192,7 +197,24 @@ public class MyFrame extends JFrame implements MouseListener,ActionListener{
 		if(e.getActionCommand().equalsIgnoreCase("Start")) {
 			ShortestPathAlgo algo=new ShortestPathAlgo();
 			algo.Start(game);
+			count=0;
+			started=true;
 			repaint();
+			
 		}
+	}
+	
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		repaint();
+		count++;
+		try {
+			Thread.sleep(10L*100L);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		run();
 	}
 }

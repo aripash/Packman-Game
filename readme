@@ -17,9 +17,10 @@ https://en.wikipedia.org/wiki/Keyhole_Markup_Language
 http://digitalappconsultancy.com/site/how-to-read-all-files-inside-folder-in-java-code/
 https://docs.oracle.com/javase/tutorial/uiswing/components/filechooser.html
 https://docs.oracle.com/javase/7/docs/api/javax/swing/JFileChooser.html
+http://tutorials.jenkov.com/java-concurrency/creating-and-starting-threads.html
 
 Version
-1.0.4
+1.0.5
 
 Authors
 Denis Shapira

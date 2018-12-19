@@ -14,5 +14,7 @@ public static void Play(String path) {
 	window.setSize(window.image.getWidth(),window.image.getHeight());
 	window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	window.setResizable(true);
+	Thread thread=new Thread(window);
+	thread.start();
 }
 }
