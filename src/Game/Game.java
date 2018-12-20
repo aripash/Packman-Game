@@ -40,7 +40,7 @@ public class Game {
 					fruits.add(new Fruit(gps));
 				}
 				else if(lineData[0].equalsIgnoreCase("P")) {
-					packmen.add(new PackMan(gps,Integer.parseInt(lineData[5]),Integer.parseInt(lineData[6])));
+					packmen.add(new PackMan(gps,(int)Double.parseDouble(lineData[5]),(int)Double.parseDouble(lineData[6])));
 				}
 			}
 		}

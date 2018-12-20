@@ -18,7 +18,7 @@ public class ShortestPathAlgo {
 		MyCoords c=new MyCoords();
 		while(!fruitsLeft.isEmpty()) {
 			Iterator<PackMan> i=packmen.iterator();
-			while(i.hasNext()) {
+			while(i.hasNext()&&!fruitsLeft.isEmpty()) {
 				Iterator<Fruit> j=fruitsLeft.iterator();
 				PackMan pack=i.next();		//the packman i want to check
 				Fruit min=j.next();		//the fruit thats the closes to the packman pack
