@@ -13,6 +13,10 @@ public class Path2KML {
 	public Path2KML(Game game) {
 		this.game=game;
 	}
+	/**
+	 * writes the game into a kml file
+	 * @param path where the function needs to write the kml
+	 */
 	public void write(String path) {
 		PrintWriter pw = null;
 		try 

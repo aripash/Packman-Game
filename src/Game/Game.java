@@ -97,6 +97,11 @@ public class Game {
 	public void addFruit(Fruit f) {
 		fruits.add(f);
 	}
+	/**
+	 * sets the time the fruit got eaten
+	 * @param min the fruit that needs to be set
+	 * @param time the time that the fruit got eaten
+	 */
 	public void addTime(Fruit min, double time) {
 		// TODO Auto-generated method stub
 		Iterator<Fruit> i=fruits.iterator();
@@ -110,6 +115,10 @@ public class Game {
 			}
 		}
 	}
+	/**
+	 * gets the time that the last fruit got eaten
+	 * @return time that the fruit got eaten last
+	 */
 	public int lastTime() {
 		Iterator<Fruit> i=fruits.iterator();
 		int maxTime=0;

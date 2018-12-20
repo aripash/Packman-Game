@@ -50,6 +50,10 @@ public class PackMan {
 	public double getRadius() {
 		return radius;
 	}
+	/**
+	 * gets the last gps on the path 
+	 * @return last Point3D in the Point3D array in path
+	 */
 	public Point3D getLastGps() {
 		return path.getPoints().get(path.getPoints().size()-1);
 	}
