@@ -12,4 +12,5 @@ if a class is in a different patch then it means it was changed to suit the new 
 1.0.6 added Path2KML function.
 1.0.6.1 added button for Path2KML.
 1.0.6.2 completed Path2KML.
-1.0.7 added UMLs
+1.0.7 added UMLs.
+1.0.7.1 fixed the timing for Path2KML.
